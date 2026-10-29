@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load static wagtailcore_tags %}
+{# static pour l'image, wagtailcore_tags pour le filtre richtext #}
 
 {% block body_class %}template-prestationspage{% endblock %}
 
@@ -8,6 +10,11 @@
 <h1>{{ page.title }}</h1>
 
 <img class="page-image" src="{% static 'images/prestations.jpg' %}" alt="Une prestation en cours au Salon Éclat">
+{# image encore statique, pas touchée dans ce brief #}
+
+{{ page.introduction|richtext }}
+{# nouveau texte dynamique, rempli depuis l'admin #}
+<ul class="prestations-list">
 
 <ul class="prestations-list">
     <li>

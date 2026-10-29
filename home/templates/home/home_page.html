@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
+{%load static wagtailcore_tags%} #Charge les tags/filtres de Wagtail
+
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
@@ -8,7 +10,14 @@
 <img class="hero-image" src="{% static 'images/facade.jpg' %}" alt="Façade du Salon Éclat">
 
 <section class="hero">
-    <h1>Bienvenue au Salon Éclat</h1>
+
+    {# affiche simplement le texte du champ, comme une variable Django classique #}
+    <h1>{{ page.accroche }}</h1> 
+
+    {# affiche l'introduction, mise en forme grâce au filtre richtext, ici pas besoin de balise c'est wagtail qui s'en charge dans le pannel #}
+    {{ page.introduction|richtext }}
+
+    {% comment %} <h1>Bienvenue au Salon Éclat</h1>
     <p>
         Depuis plus de 10 ans, le Salon Éclat accueille les habitant·e·s du quartier
         pour prendre soin de leurs cheveux dans une ambiance chaleureuse et conviviale.
@@ -17,7 +26,7 @@
     <p>
         Découvrez nos prestations, rencontrez notre équipe, ou contactez-nous directement
         pour prendre rendez-vous.
-    </p>
+    </p> {% endcomment %}
 </section>
 
 {% endblock content %}
